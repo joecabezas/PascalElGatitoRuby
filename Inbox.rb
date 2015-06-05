@@ -1,8 +1,8 @@
 require 'yaml'
+require './Config.rb'
 
 class Inbox
 
-	FILE_NAME = 'inbox.yaml'
 	@data = nil
 
 	def self.enqueue(message, media_url)
@@ -20,15 +20,15 @@ class Inbox
 	private
 
 	def self.flush
-		File.write(FILE_NAME, data.to_yaml)
+		File.write(Config.data[:files][:inbox], data.to_yaml)
 		data.to_yaml
 	end
 
 	def self.data
 		return @data unless @data.nil?
 
-		@data = if File.exists? (FILE_NAME)
-			YAML.load_file(FILE_NAME)
+		@data = if File.exists? (Config.data[:files][:inbox])
+			YAML.load_file(Config.data[:files][:inbox])
 		else
 			[]
 		end
