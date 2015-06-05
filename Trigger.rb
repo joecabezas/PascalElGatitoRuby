@@ -1,18 +1,21 @@
 require './RandomPhrases.rb'
+require './Inbox.rb'
 
 class Trigger
 
-	def trigger
+	def self.trigger
 		message = get_message
 		media_url = get_media_url
+
+		Inbox.enqueue(message, media_url)
 	end
 
 	private
-	def get_message
+	def self.get_message
 		RandomPhrases.get
 	end
 
-	def get_media_url
+	def self.get_media_url
 		'image.gif'
 	end
 end
