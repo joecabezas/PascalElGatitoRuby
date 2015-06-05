@@ -1,9 +1,9 @@
 require 'yaml'
+require './Config.rb'
 
 class RandomPhrases
 
-	FILE_NAME = 'random_phrases.yaml'
-	@phrases = YAML.load_file(FILE_NAME)
+	@phrases = YAML.load_file(Config.data[:files][:random_phrases])
 
 	def self.get
 		@phrases.sample
