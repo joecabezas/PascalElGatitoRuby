@@ -19,10 +19,13 @@ options =
 {
 	log_output: true,
 	backtrace: true,
-	#monitor: true,
+	monitor: true,
 	multiple: false,
 }
 
-Daemons.run_proc('TwitterCam', options) do
+Daemons.run_proc('Main.rb', options) do
 	main = Main.new
+	loop do
+		sleep(0.1)
+	end
 end
