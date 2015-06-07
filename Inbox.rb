@@ -1,12 +1,13 @@
 require 'yaml'
 require './Config.rb'
+require './TwitterJob.rb'
 
 class Inbox
 
 	@data = nil
 
 	def self.enqueue(message, media_url)
-		data.push({message: message, media_url: media_url})
+		data.push( TwitterJob.new(message, media_url) )
 		flush
 		data
 	end
@@ -15,6 +16,10 @@ class Inbox
 		result = data.shift
 		flush
 		result
+	end
+
+	def self.peek
+		data.first	
 	end
 
 	private
