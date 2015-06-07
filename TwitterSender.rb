@@ -1,5 +1,6 @@
 require 'twitter'
 require './Inbox.rb'
+require './TwitterJob.rb'
 
 class TwitterSender
 
