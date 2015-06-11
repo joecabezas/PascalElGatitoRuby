@@ -27,6 +27,7 @@ take_animated()
 		-vf scale=320:-1 \
 		-pix_fmt bgr8 \
 		-vcodec gif \
+		-r 10 \
 		-t 4 \
 		video%03d.jpg
 
