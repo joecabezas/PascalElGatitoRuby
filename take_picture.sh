@@ -21,13 +21,13 @@ OUTPUT_FILE="output.jpg"
 take_animated()
 {
 	#take screenshots
-	ffmpeg \
-		-r 10 \
+	avconv \
 		-f video4linux2 \
 		-i /dev/video0 \
 		-vf scale=320:-1 \
-		-t 3 \
+		-pix_fmt bgr8 \
 		-vcodec gif \
+		-t 4 \
 		video%03d.jpg
 
 	#converto screenshots to gif
