@@ -1,6 +1,6 @@
 require 'yaml'
 
-class Config
+class Configuration
 
 	CONFIG_FILE = 'config/config.yaml'
 

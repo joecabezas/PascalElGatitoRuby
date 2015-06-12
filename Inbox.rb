@@ -1,5 +1,5 @@
 require 'yaml'
-require './Config.rb'
+require './Configuration.rb'
 require './TwitterJob.rb'
 
 class Inbox
@@ -25,15 +25,15 @@ class Inbox
 	private
 
 	def self.flush
-		File.write(Config.data[:files][:inbox], data.to_yaml)
+		File.write(Configuration.data[:files][:inbox], data.to_yaml)
 		data.to_yaml
 	end
 
 	def self.data
 		return @data unless @data.nil?
 
-		@data = if File.exists? (Config.data[:files][:inbox])
-			YAML.load_file(Config.data[:files][:inbox])
+		@data = if File.exists? (Configuration.data[:files][:inbox])
+			YAML.load_file(Configuration.data[:files][:inbox])
 		else
 			[]
 		end

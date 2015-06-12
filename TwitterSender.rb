@@ -1,7 +1,7 @@
 require 'twitter'
 require './Inbox.rb'
 require './TwitterJob.rb'
-require './Config.rb'
+require './Configuration.rb'
 
 class TwitterSender
 
@@ -28,10 +28,10 @@ class TwitterSender
 	def self.client
 		if @client.nil?
 			@client = Twitter::REST::Client.new do |config|
-				config.consumer_key        = Config.data[:twitter][:consumer_key]
-				config.consumer_secret     = Config.data[:twitter][:consumer_secret]
-				config.access_token        = Config.data[:twitter][:access_token]
-				config.access_token_secret = Config.data[:twitter][:access_token_secret]
+				config.consumer_key        = Configuration.data[:twitter][:consumer_key]
+				config.consumer_secret     = Configuration.data[:twitter][:consumer_secret]
+				config.access_token        = Configuration.data[:twitter][:access_token]
+				config.access_token_secret = Configuration.data[:twitter][:access_token_secret]
 			end
 		else
 			@client
