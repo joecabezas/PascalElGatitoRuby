@@ -10,6 +10,7 @@ options =
 }
 
 Daemons.run_proc('Daemon.rb', options) do
+	puts "Daemon started"
 	main = Main.new
 	main.wait
 end
