@@ -15,6 +15,7 @@ class Trigger
 	end
 
 	def self.media_url
-		'image.gif'
+		system "sh take_picture.sh -a" and return "output.gif"
+		nil
 	end
 end

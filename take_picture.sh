@@ -53,7 +53,9 @@ take_photo()
 
 #make target dir
 if "$ANIMATED"; then
-	take_animated
+	take_animated && return 0
 else
-	take_photo
+	take_photo && return 0
 fi
+
+return 1

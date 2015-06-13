@@ -1,33 +1,51 @@
-require './Trigger.rb'
 require 'pi_piper'
+require './Trigger.rb'
+require './Configuration.rb'
+
 include PiPiper
 
 class Main
 
-	PIN_SENSOR = 17
+	PIN_SENSOR = 7
 	PIN_BUZZER = 18
 
+	@last = nil
+	@now = nil
+	
 	attr_reader :pin_sensor, :pin_buzzer
 
 	def initialize
 		setup
+		buzz
 	end
 
 	def setup
-		#setup GPIO here
-		@pin_sensor = PiPiper::Pin.new(:pin => PIN_SENSOR, :direction => :in, :pull => :up)
+		@pin_sensor = PiPiper::Pin.new(:pin => PIN_SENSOR, :direction => :in, :pull => :down)
 		@pin_buzzer = PiPiper::Pin.new(:pin => PIN_BUZZER, :direction => :out)
 
-		after ({pin: @pin_sensor.pin, goes: :low}) do
+		after ({pin: @pin_sensor.pin, goes: :high}) do |pin|
 			sensor_activated
 		end
-
-		buzz
 	end
 
 	def sensor_activated
-		#Trigger.trigger
-		buzz
+		puts "sensor activated 0"
+	
+	        if @last.nil?
+	                @last = @now = Time.now
+			go
+	                return
+	        end
+	
+	        @now = Time.now
+	
+		delta = @now - @last
+	        if delta > Configuration.data[:options][:minimum_activation_time]
+			@last = @now
+			go
+	        else
+			puts "ignoring, delta: #{delta}"
+	        end
 	end
 
 	def wait
@@ -35,18 +53,16 @@ class Main
 	end
 
 	def buzz
-		puts Random.rand
+		15.times do
+			@pin_buzzer.on
+			sleep 0.005
+			@pin_buzzer.off
+		end
+	end
 
-		@pin_buzzer.on
-		sleep 0.3
-		@pin_buzzer.off
-
-		@pin_buzzer.on
-		sleep 0.3
-		@pin_buzzer.off
-
-		@pin_buzzer.on
-		sleep 0.3
-		@pin_buzzer.off
+	def go
+		puts "go!"
+		buzz
+		#Trigger.trigger
 	end
 end
