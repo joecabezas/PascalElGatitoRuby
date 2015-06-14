@@ -1,6 +1,7 @@
 ---
 :options:
   :minimum_activation_time: 70
+  :animated_output: true
 :files:
   :inbox: data/inbox.yaml
   :random_phrases: data/random_phrases.yaml

@@ -31,7 +31,7 @@ take_animated()
 		-t 4 \
 		video%03d.jpg
 
-	#converto screenshots to gif
+	#convert screenshots to gif
 	convert \
 		-delay 10 \
 		-loop 0 \
@@ -53,9 +53,9 @@ take_photo()
 
 #make target dir
 if "$ANIMATED"; then
-	take_animated && return 0
+	take_animated && echo $OUTPUT_FILE_ANIMATED && return 0
 else
-	take_photo && return 0
+	take_photo && echo $OUTPUT_FILE && return 0
 fi
 
 return 1
