@@ -6,7 +6,7 @@ include PiPiper
 
 class Main
 
-	PIN_SENSOR = 7
+	PIN_SENSOR = 4
 	PIN_BUZZER = 18
 
 	@last = nil
@@ -29,7 +29,7 @@ class Main
 	end
 
 	def sensor_activated
-		puts "sensor activated 0"
+		puts "sensor activated"
 	
 	        if @last.nil?
 	                @last = @now = Time.now
