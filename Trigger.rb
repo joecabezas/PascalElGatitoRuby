@@ -21,7 +21,7 @@ class Trigger
 
 	def self.media_url
 		command = "sh take_picture.sh"
-		(command + " -a") if Configuration.data[:options][:animated_output]
+		command = (command + " -a") if Configuration.data[:options][:animated_output]
 		output = Open3.popen3(command) { |stdin, stdout, stderr, wait_thr| stdout.read }
 
 		original_filename = output.strip
