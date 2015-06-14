@@ -31,6 +31,8 @@ class Trigger
 
 		destination = "#{IMAGE_FOLDER}/#{Time.now.strftime("%Y-%m-%d-%H-%M-%S")}#{extension}"
 		FileUtils.mv(original_filename, destination)
+
+		destination
 	end
 end
 
