@@ -21,9 +21,7 @@ class Trigger
 	end
 
 	def self.media_url
-		dir = File.dirname(__FILE__)
-
-		command = "sh #{dir}/#{SCRIPT_NAME}"
+		command = "sh #{SCRIPT_NAME}"
 		command = (command + " -a") if Configuration.data[:options][:animated_output]
 
 		output = Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
@@ -31,13 +29,12 @@ class Trigger
 			stdout.read
 		end
 
-		original_filename = [dir, output.strip].join("/")
+		original_filename = output.strip
 		extension = File.extname(original_filename)
 
-		img_dir = [dir, IMAGE_FOLDER].join("/")
-		Dir.mkdir(img_dir) unless File.exists?(img_dir)
+		Dir.mkdir(IMAGE_FOLDER) unless File.exists?(IMAGE_FOLDER)
 
-		destination = [img_dir, Time.now.strftime("%Y-%m-%d-%H-%M-%S") + extension].join("/")
+		destination = [IMAGE_FOLDER, Time.now.strftime("%Y-%m-%d-%H-%M-%S") + extension].join("/")
 		puts "original_filename: #{original_filename}"
 		puts "destination: #{destination}"
 		FileUtils.mv(original_filename, destination)

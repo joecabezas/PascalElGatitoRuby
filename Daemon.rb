@@ -11,6 +11,8 @@ options =
 
 Daemons.run_proc('Daemon.rb', options) do
 	puts "Daemon started"
-	main = Main.new
-	main.wait
+	Dir.chdir(File.dirname(__FILE__)) do
+		main = Main.new
+		main.wait
+	end
 end
