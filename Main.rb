@@ -63,6 +63,6 @@ class Main
 	def go
 		puts "go!"
 		buzz
-		#Trigger.trigger
+		Trigger.trigger
 	end
 end
