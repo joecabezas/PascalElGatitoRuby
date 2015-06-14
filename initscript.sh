@@ -15,15 +15,18 @@
 case "$1" in 
     start)
         echo "Starting twittercamdaemon"
+	sudo ruby /home/pi/git/PascalElGatitoRuby/Daemon.rb start
         ;;
     stop)
         echo "Stopping twitercamdaemon"
+	sudo ruby /home/pi/git/PascalElGatitoRuby/Daemon.rb stop
         ;;
     status)
 	echo "Status"
+	sudo ruby /home/pi/git/PascalElGatitoRuby/Daemon.rb status
 	;;
     *)
-        echo "Usage: /etc/init.d/twittercamdaemon.sh start|stop"
+        echo "Usage: /etc/init.d/twittercamdaemon.sh start|stop|status"
         exit 1
         ;;
 esac
