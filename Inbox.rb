@@ -1,4 +1,5 @@
 require 'yaml'
+require 'fileutils'
 require './Configuration.rb'
 require './TwitterJob.rb'
 
@@ -15,6 +16,10 @@ class Inbox
 	def self.dequeue
 		result = data.shift
 		flush
+
+		#remove image
+		FileUtils.rm(result.media_url)
+
 		result
 	end
 

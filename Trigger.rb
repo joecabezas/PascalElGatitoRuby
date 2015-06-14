@@ -12,7 +12,7 @@ class Trigger
 
 	def self.trigger
 		Inbox.enqueue(message, media_url)
-		#TwitterSender.check
+		TwitterSender.check
 	end
 
 	private
