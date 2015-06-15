@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#copy this file into /etc/init.d/ (symlinks do not work, I tried)
+
 ### BEGIN INIT INFO
 # Provides:          TwitterCam
 # Required-Start:    $remote_fs $syslog
@@ -20,6 +22,10 @@ case "$1" in
     stop)
         echo "Stopping TwitterCam"
 	sudo ruby /home/pi/git/PascalElGatitoRuby/Daemon.rb stop
+        ;;
+    restart)
+        echo "Restarting TwitterCam"
+	sudo ruby /home/pi/git/PascalElGatitoRuby/Daemon.rb restart
         ;;
     status)
 	echo "TwitterCam status"
