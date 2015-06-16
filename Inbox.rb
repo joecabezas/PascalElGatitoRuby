@@ -18,7 +18,7 @@ class Inbox
 		flush
 
 		#remove image
-		FileUtils.rm(result.media_url)
+		FileUtils.rm(result.media_url) if File.exists?(result.media_url)
 
 		result
 	end
@@ -44,4 +44,13 @@ class Inbox
 		end
 	end
 
+	def self.validate_data
+		data.each do |job|
+			if(File.exists?(job.media_url))
+				FileUtils.rm(job.media_url) unless File.size?(job.media_url)
+			else
+				dequeue
+			end
+		end
+	end
 end

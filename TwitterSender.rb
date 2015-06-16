@@ -6,15 +6,18 @@ require './Configuration.rb'
 class TwitterSender
 
 	def self.check
+		#validate Inbox for missing files
+		Inbox.validate_data
+
 		#get job from inbox
 		job = Inbox.peek or return
 
-		#try to send	
+		#try to send
 		begin
 			client.update_with_media(job.message, open(job.media_url))
 		rescue
 			#could not send twitter
-			puts "failed: #{$!}"
+			puts "TwitterSender.rb: failed: #{$!}"
 			return
 		end
 
